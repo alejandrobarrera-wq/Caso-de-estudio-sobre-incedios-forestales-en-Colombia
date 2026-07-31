@@ -1,5 +1,16 @@
 # Caso-de-estudio-sobre-incedios-forestales-en-Colombia
-Procesamiento y clasificación geoespacial de incendios forestales en Colombia mediante datos de NASA FIRMS y la cartografía oficial de ecosistemas del IDEAM. Incluye limpieza y validación de coordenadas, transformación de sistemas de referencia espacial, creación de geometrías de puntos
+Procesamiento y clasificación geoespacial de incendios forestales en Colombia mediante datos de NASA FIRMS y la cartografía oficial de ecosistemas del IDEAM. Incluye limpieza y validación de coordenadas, transformación de sistemas de referencia espacial, creación de geometrías de puntos.
+
+Ahora, necesitamos organizar y tener en cuenta todos los documentos y bases de datos que vamos a necesitar organizar para ejecutar todo el documento. Todo lo que necesitamos esta en esta carpte y ya todas las rutas estan para que funcione solo en ese drive, ahi estan los siguientes archivos:
+
+Nuestro inventario de casos sobre incendios forestales registrados, aquello con el que vamos a trabajar y llenar las columnas de COORDENADAS Y ECOSISTEMA
+
+Tres carpetas con la informacion de tres sistemas satelitales llamados Modis, NOA20 y Suomi que son los archivos principales descargados desde NASA FIRMS para corroborar que los incendios de nuestra base de datos (inventario de casos) si esten registrados en la base datos la NASA.
+
+Una base de datos del IDEAM que contiene un mapeo de todo Colombia y se va a tratar con temas como puntos (sacados de las coordenadas proveidas por el dataset de NASA FIRMS), Capas, entre otros atributos sobre las mismas.
+
+Por supuesto a medida que corre el codigo se descargan algunos archivos como "resultados incendio IDEAM" extraidos gracias a Sjoin, el cual hablablaremos mas adelante
+
 
 ##Flujo de trabajo procesamiento y enriquecimiento geoespacial
 Obtención y consolidación de datos: recopilación y organización de registros históricos de incendios forestales en Colombia.
