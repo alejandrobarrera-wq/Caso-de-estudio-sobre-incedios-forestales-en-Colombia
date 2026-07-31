@@ -1,15 +1,15 @@
 # Caso-de-estudio-sobre-incedios-forestales-en-Colombia
 Procesamiento y clasificación geoespacial de incendios forestales en Colombia mediante datos de NASA FIRMS y la cartografía oficial de ecosistemas del IDEAM. Incluye limpieza y validación de coordenadas, transformación de sistemas de referencia espacial, creación de geometrías de puntos.
 
-Ahora, necesitamos organizar y tener en cuenta todos los documentos y bases de datos que vamos a necesitar organizar para ejecutar todo el documento. Todo lo que necesitamos esta en esta carpte y ya todas las rutas estan para que funcione solo en ese drive, ahi estan los siguientes archivos:
+Ahora, necesitamos organizar y tener en cuenta todos los documentos y bases de datos que vamos a necesitar organizar para ejecutar todo el documento. Todo lo que necesitamos esta en esta carpeta y ya todas las rutas estan para que funcione solo en ese drive, ahi estan los siguientes archivos:
 
-Nuestro inventario de casos sobre incendios forestales registrados, aquello con el que vamos a trabajar y llenar las columnas de COORDENADAS Y ECOSISTEMA
+Nuestro inventario de casos sobre incendios forestales registrados, aquello con el que vamos a trabajar y llenar las columnas de COORDENADAS Y ECOSISTEMA (14.895 de datos)
 
-Tres carpetas con la informacion de tres sistemas satelitales llamados Modis, NOA20 y Suomi que son los archivos principales descargados desde NASA FIRMS para corroborar que los incendios de nuestra base de datos (inventario de casos) si esten registrados en la base datos la NASA.
+Tres carpetas con la informacion de tres sistemas satelitales llamados Modis, NOA20 y Suomi que son los archivos principales descargados desde NASA FIRMS para corroborar que los incendios de nuestra base de datos (inventario de casos) si esten registrados en la base datos la NASA. (2.2 millones de datos)
 
 Una base de datos del IDEAM que contiene un mapeo de todo Colombia y se va a tratar con temas como puntos (sacados de las coordenadas proveidas por el dataset de NASA FIRMS), Capas, entre otros atributos sobre las mismas.
 
-Por supuesto a medida que corre el codigo se descargan algunos archivos como "resultados incendio IDEAM" extraidos gracias a Sjoin, el cual hablablaremos mas adelante
+Por supuesto a medida que corre el codigo se descargan algunos archivos como "resultados incendio IDEAM" o "NASA FIRMS 2010-2024" extraidos gracias a Sjoin y concat (que se uso para juntar toda la info de los tres sistemas satelitales en un solo dataset sin mezclar los satelites entre si, el cual hablablaremos mas adelante
 
 
 ##Flujo de trabajo procesamiento y enriquecimiento geoespacial
