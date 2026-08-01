@@ -75,68 +75,90 @@ Algunos ejemplos son:
 
 Estos archivos son productos intermedios o finales generados durante el procesamiento.
 
-# Flujo de trabajo: procesamiento y enriquecimiento geoespacial ( hacerlo en el diagrama de flujo)
+## 1. Obtención y consolidación de datos
 
-DATOS DE ENTRADA
-│
-├── Inventario de incendios
-├── NASA FIRMS
-└── Cartografía IDEAM
-        │
-        ▼
-┌─────────────────────────────┐
-│ 1. Limpieza y exploración   │
-└─────────────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│ 2. Validación de datos      │
-│    Fechas y coordenadas     │
-└─────────────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│ 3. Georreferenciación       │
-│    Coordenadas → Point      │
-└─────────────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│ 4. Homologación CRS         │
-│    EPSG:4326 → EPSG:4686   │
-└─────────────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│ 5. Validación espacial      │
-└─────────────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│ 6. Spatial Join              │
-│    Point + Polígono IDEAM   │
-└─────────────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│ 7. Clasificación ecológica  │
-│    Gran Bioma + Ecosistema  │
-└─────────────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│ 8. Validación y             │
-│    reclasificación          │
-└─────────────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│ DATASET ENRIQUECIDO         │
-│ Incendio + ubicación +      │
-│ ecosistema + variables     │
-└─────────────────────────────┘
-        │
-        ▼
-┌─────────────────────────────┐
-│ ANÁLISIS Y MACHINE LEARNING │
-└─────────────────────────────┘
+Recopilación y organización de registros históricos de incendios forestales en Colombia, junto con las detecciones térmicas provenientes de NASA FIRMS y la cartografía oficial del IDEAM.
+
+## 2. Exploración inicial de los datos
+
+Revisión de las variables disponibles, estructura de las bases de datos, cantidad de registros y análisis de los campos relacionados con la ubicación y clasificación inicial de los incendios.
+
+## 3. Análisis exploratorio y visualización
+
+Generación de gráficos, estadísticas y análisis descriptivos para identificar patrones temporales, geográficos y ambientales relacionados con los incendios.
+
+## 4. Identificación de datos faltantes o poco confiables
+
+Detección de registros que presentaban información incompleta o clasificaciones como "Otros / No determinado", las cuales posteriormente podían ser mejoradas mediante información geoespacial.
+
+## 5. Georreferenciación de los incendios
+
+Utilización de las coordenadas obtenidas mediante NASA FIRMS para transformar los registros de incendios en geometrías espaciales de tipo Point.
+
+## 6. Validación de coordenadas
+
+Extracción de latitud y longitud desde el campo COORDENADAS y comprobación de sus rangos geográficos para verificar la consistencia espacial de los registros.
+
+## 7. Integración de información geográfica oficial
+
+Descarga e incorporación de la cartografía oficial de ecosistemas continentales, costeros y marinos del IDEAM.
+
+## 8. Procesamiento de la cartografía IDEAM
+
+Identificación y carga de la geodatabase (.gdb) y de la capa de ecosistemas correspondiente.
+
+La capa utilizada contiene aproximadamente *460.350 unidades espaciales*.
+
+## 9. Validación de sistemas de referencia espacial
+
+Se revisaron los sistemas de coordenadas utilizados por ambas fuentes.
+
+Los puntos de los incendios fueron transformados al CRS utilizado por la cartografía IDEAM:
+
+*EPSG:4686 — MAGNA-SIRGAS*
+
+Este paso garantiza que los puntos y los polígonos puedan compararse correctamente en el espacio.
+
+## 10. Validación espacial
+
+Se verificó que los puntos de los incendios estuvieran dentro de la extensión geográfica de la cartografía IDEAM.
+
+También se comprobó que cada incendio tuviera una única correspondencia espacial con la capa de ecosistemas.
+
+## 11. Spatial Join
+
+El Spatial Join permite relacionar información utilizando la *posición geográfica* de los elementos.
+
+### Explicación sencilla
+
+En nuestro caso tenemos los incendios representados como *puntos* y los ecosistemas del IDEAM representados como *polígonos*.
+
+El Spatial Join responde a una pregunta sencilla:
+
+*¿Dentro de qué polígono del IDEAM se encuentra cada incendio?*
+
+El proceso consiste en tomar las coordenadas del incendio, convertirlas en un punto, ubicar ese punto sobre la cartografía del IDEAM y determinar dentro de qué polígono se encuentra.
+
+Una vez identificado el polígono correspondiente, el incendio recibe la información ambiental y ecosistémica asociada a dicho polígono.
+
+Por ejemplo, si un incendio se encuentra dentro de un polígono clasificado por el IDEAM como Bosque Basal Humedo, el registro del incendio puede recibir esa clasificación.
+
+### Explicación técnica
+
+Los registros del inventario fueron transformados en un GeoDataFrame, utilizando sus coordenadas para generar geometrías de tipo Point.
+
+Posteriormente, se homologó el sistema de referencia espacial de los puntos con el CRS de la cartografía IDEAM.
+
+La integración espacial se realizó mediante GeoPandas utilizando la función sjoin y la relación espacial within.
+
+En términos técnicos, predicate="within" establece que la geometría del punto de incendio debe encontrarse dentro de la geometría del polígono correspondiente de la capa IDEAM.
+
+Por lo tanto, el proceso no realiza una coincidencia textual entre las bases de datos. La asociación se realiza mediante una *relación espacial entre geometrías*.
+
+El resultado consiste en conservar la información original de cada incendio y agregar los atributos ambientales y ecosistémicos correspondientes al polígono IDEAM donde se encuentra ubicado.
+
+## 15. Generación de la base final
+
+Una vez completados los procesos de georreferenciación, validación y clasificación espacial, se generan las bases procesadas que contienen el inventario enriquecido con información geográfica y ecosistémica.
+
+# Flujo de trabajo: procesamiento y enriquecimiento geoespacial ( hacerlo en el diagrama de flujo)
