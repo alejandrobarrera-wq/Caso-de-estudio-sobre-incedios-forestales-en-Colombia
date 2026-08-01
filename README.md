@@ -11,7 +11,7 @@ matplotlib: generación de gráficos y visualizaciones.
 Python 3: entorno principal de ejecución.
 
 # Objetivos del proyecto
-Desarrollar una base de datos geoespacial de incendios forestales en Colombia que integre registros históricos, datos satelitales y características ambientales de los ecosistemas, para entender mejor dónde y bajo qué condiciones ocurren los incendios.
+Desarrollar una base de datos geoespacial de incendios forestales en Colombia que integre registros históricos, datos satelitales y características ambientales de los ecosistemas, para entender mejor dónde y bajo qué condiciones ocurren los incendios. buscamos lograr relacionar cada incendio con su ecosistema, utilizando la cartografía oficial del IDEAM e integrar información satelital para enriquecer nuestro inventario de casos.
 
 # Organización de los datos
 
@@ -23,7 +23,7 @@ En esta carpeta se encuentran las principales fuentes y rutas de información ut
 
 ## 1. Inventario de casos (UNGRD, Unidad Nacional para la Gestión del Riesgo de Desastres)
 
-Contiene nuestro inventario de incendios forestales registrados en Colombia por la UNGRD. Aproximadamente quince mil incendios, que constituye la base principal sobre la cual se desarrolla el procesamiento.
+Contiene nuestro inventario de incendios forestales registrados en Colombia por la UNGRD. Aproximadamente quince mil incendios, que constituye la base principal sobre la cual vamos a desarrollar el procesamiento.
 
 El inventario contiene variables relacionadas con:
 
@@ -38,21 +38,19 @@ El inventario contiene variables relacionadas con:
 
 Esta base es enriquecida progresivamente mediante información proveniente de NASA FIRMS y del IDEAM.
 
-## 2. Datos satelitales NASA FIRMS
+## 2. Pre procesamiento
 
-Se cuenta con tres conjuntos principales de información provenientes de diferentes sistemas satelitales disponibles mediante NASA FIRMS:
+Los registros provenientes NASA FIRMS que contienen informacion de MODIS, NOAA-20 y Suomi NPP fueron procesados y cargados para  mas adelante hacer un dataset con todos los registros obtenidos de los tres sistemas satelitales.
 
-- MODIS
-- NOAA-20
-- Suomi NPP
+El objetivo de esta conglomeracion fue facilitar el cruce entre las detecciones satelitales y el inventario de casos, manteniendo las variables necesarias para el análisis.
 
-Estos archivos contienen millones de detecciones térmicas y variables relacionadas con cada detección, como:
+Estos archivos contienen millones de datos sobre las detecciones térmicas y variables relacionadas con cada detección, como:
 
 - `latitude`
 - `longitude`
 - `acq_date`
 - `confidence`
-- `frp`
+- `frp` (Potencia Radiativa del Fuego). Mide la tasa de energía radiada por un incendio en un momento dado
 
 Los datos de los diferentes sistemas satelitales son consolidados para facilitar el procesamiento conjunto y la búsqueda de coincidencias con nuestro inventario de incendios.
 
@@ -64,6 +62,8 @@ La información se encuentra almacenada en una geodatabase (`.gdb`) y contiene a
 
 Cada polígono contiene atributos ambientales y ecosistémicos que posteriormente son asociados a los incendios mediante análisis espacial.
 ( PRE PROCESAMIENTO al descargar los datos y explicar los duplicados una vez jecho el dataset)
+
+
 ## 4. Archivos generados durante el procesamiento
 
 A medida que se ejecuta el proyecto se generan diferentes archivos derivados, entre ellos resultados de procesos de integración, consolidación y análisis espacial.
@@ -75,13 +75,6 @@ Algunos ejemplos son:
 
 Estos archivos son productos intermedios o finales generados durante el procesamiento.
 
-# Consolidación de NASA FIRMS (lo pongo en pre procesamiento)
-
-Los registros provenientes de MODIS, NOAA-20 y Suomi NPP fueron procesados y consolidados para disponer de una base conjunta de detecciones térmicas.
-
-El objetivo de esta consolidación fue facilitar el cruce entre las detecciones satelitales y el inventario de casos, manteniendo las variables necesarias para el análisis.
-
-Entre las variables principales utilizadas se encuentran `latitude`, `longitude`, `acq_date`, `confidence` y `frp`.
 
 # Flujo de trabajo: procesamiento y enriquecimiento geoespacial ( hacerlo en el diagrama de flujo)
 
