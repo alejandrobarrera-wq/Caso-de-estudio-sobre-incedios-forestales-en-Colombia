@@ -1,6 +1,23 @@
+████████╗███████╗ █████╗ ███╗   ███╗
+╚══██╔══╝██╔════╝██╔══██╗████╗ ████║
+   ██║   █████╗  ███████║██╔████╔██║
+   ██║   ██╔══╝  ██╔══██║██║╚██╔╝██║
+   ██║   ███████╗██║  ██║██║ ╚═╝ ██║
+   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
+
+ ██████╗ ██████╗ ██╗      ██████╗ ███╗   ███╗██████╗ ██╗ █████╗ 
+██╔════╝██╔═══██╗██║     ██╔═══██╗████╗ ████║██╔══██╗██║██╔══██╗
+██║     ██║   ██║██║     ██║   ██║██╔████╔██║██████╔╝██║███████║
+██║     ██║   ██║██║     ██║   ██║██║╚██╔╝██║██╔══██╗██║██╔══██║
+╚██████╗╚██████╔╝███████╗╚██████╔╝██║ ╚═╝ ██║██████╔╝██║██║  ██║
+ ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝ ╚═╝╚═╝  ╚═╝
+
 # Caso de estudio sobre incendios forestales en Colombia
 
 Procesamiento y clasificación geoespacial de incendios forestales en Colombia mediante datos de **NASA FIRMS** y la cartografía oficial de ecosistemas del **IDEAM**. El proyecto incluye limpieza y validación de datos, integración de información satelital, implementación de un agente de inteligencia artificial para la obtención y asociación de coordenadas, transformación de sistemas de referencia espacial, creación de geometrías de puntos y clasificación ecosistémica mediante análisis espacial.
+
+# Requerimientos
+
 
 # Organización de los datos
 
