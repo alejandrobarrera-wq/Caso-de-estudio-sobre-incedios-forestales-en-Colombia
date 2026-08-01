@@ -21,9 +21,9 @@ https://drive.google.com/drive/folders/1IpXy65wyVVcIRdlz9IuSRqXiLV4kGPwJ?usp=sha
 
 En esta carpeta se encuentran las principales fuentes y rutas de información utilizadas durante el proyecto.
 
-## 1. Inventario de casos
+## 1. Inventario de casos (UNGRD, Unidad Nacional para la Gestión del Riesgo de Desastres)
 
-Contiene nuestro inventario de incendios forestales registrados en Colombia, que constituye la base principal sobre la cual se desarrolla el procesamiento.
+Contiene nuestro inventario de incendios forestales registrados en Colombia por la UNGRD. Aproximadamente quince mil incendios, que constituye la base principal sobre la cual se desarrolla el procesamiento.
 
 El inventario contiene variables relacionadas con:
 
