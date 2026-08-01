@@ -8,7 +8,7 @@ Todo el material necesario para ejecutar el proyecto se encuentra organizado en 
 
 https://drive.google.com/drive/folders/1IpXy65wyVVcIRdlz9IuSRqXiLV4kGPwJ?usp=sharing
 
-En esta carpeta se encuentran las principales fuentes de información utilizadas durante el proyecto.
+En esta carpeta se encuentran las principales fuentes y rutas de información utilizadas durante el proyecto.
 
 ## 1. Inventario de casos
 
